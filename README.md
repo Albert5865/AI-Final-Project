@@ -25,23 +25,12 @@ Implementation of AE, VAE and CVAE. Trained CVAE on faces from  [UTKFace Dataset
 ### Conditional generation
 Using ```synthetic.py```, we can sample from the prior distribution of the CVAE, concatenate the vector with our desired ecnoding of the smile degree and let
 the CVAE decode this sampled noise into a synthetic face of the desired smile degree. The range of smile-degree encodings in the training set is [-1,+1], where
-+1 is most smiley, -1 is most non-smiley. Below side to side  64 synthetic images for encodings -0.5, +0.5 are shown produced with this method for the GrayScale implementation
-
-<p float="left">
-  <img src="black_and_white/results/encode-0.5.png" width="400" />
-  <img src="black_and_white/results/encode0.5.png" width="400" /> 
-</p>
++1 is most smiley, -1 is most non-smiley. Below side to side  64 synthetic images for encodings -0.5, +0.5 are shown 
 
 Below 4 images are sampled for every 0.1 increment in between [-1,1] for the RGB case, showcasing the synthetic image generation potential. Notice how the synthetic images are more varied for encodings around [-0.7,-0.5] and [0.5, 0.7]. Which is the region with highest counts of samples in the dataset.
 
 <img src="figures/all_synthetic.png" width="800" />
 
-## Forcing smiles
-With the trained model, one can use the pictures from the training set and instead of feeding in the  smile-degree encode of the corresponding picture we can fix an encoding or shift it by a factor to force the image a smile/non smile. Below this is done for 32 picture of the training set, on the op the original 32 images are shown, below the reconstruction with their actual encoding, and then we shift the encoding by +0.5, +0.7, -0.5, -0.7 to change the smile degree in the original picture (zoom in to see in detail!). Finally the same diagram is now shown for a single picture.
-
-<img src="black_and_white/results/forcing_smiles_all.png" width="800" />
-
-<img src="black_and_white/results/forcing_smiles_one.png" width="500" />
 
 ## Probing the Latent Space
 The RGB implementation used a latent space of dimension 20 and thus can't be directly represented. During training for every epoch the variance across every dimension is computed in an online approach using Welford's algorithm, this can be used to see which dimensions of the latent space are mostly used. In the plots below a heatmap is shown for the variance of the latent space across the first 50 epochs (left), last 50 epochs (right) and all training (bottom) by showing only one in every 20 epochs.
