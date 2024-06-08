@@ -33,12 +33,6 @@ Below 4 images are sampled for every 0.1 increment in between [-1,1] for the RGB
 
 
 ## Probing the Latent Space
-The RGB implementation used a latent space of dimension 20 and thus can't be directly represented. During training for every epoch the variance across every dimension is computed in an online approach using Welford's algorithm, this can be used to see which dimensions of the latent space are mostly used. In the plots below a heatmap is shown for the variance of the latent space across the first 50 epochs (left), last 50 epochs (right) and all training (bottom) by showing only one in every 20 epochs.
-<p float="center">
-  <img src="results/plots/latent_var_first_50.png" width="400" />
-  <img src="results/plots/latent_var_last_50.png" width="400" />
-  <img src="results/plots/latent_var.png" width="700" />
-</p>
 
 Here we can see how the usage of the Latent space changes as the model learn to reconstruct the data. At the beggining it uses all the latent space but at the the end there are dimensions that are much more used than others, notice th horizontal white lines. Using this plot then we can sample the latent space uniformly across some given dimension. By fixing all other dimensions to value 0.0 and moving uniformly some dimension and decode the samples into images we can visualize what each component is doing, roughly. Since there are a lot of dimensions we can use the latent variance plot to select the most important ones and then using this method visualize their effect.
 
