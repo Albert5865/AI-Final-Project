@@ -1,7 +1,7 @@
 # Conditional Smiles! (SmileCVAE)
 
 ## About
-Implementation of AE, VAE and CVAE. Trained CVAE on faces from  [UTKFace Dataset](https://susanqq.github.io/UTKFace/). With an (handmade) encoding of the Smile-strength degree to produce conditional generation of synthetic faces with a given smile degree. The project has two implementations, one using the images in the dataset in Grayscale and other using the images in the dataset in RGB. The former Grayscale implementation can be found under ```black_and_white/```
+Implementation of AE, VAE and CVAE. Trained CVAE on faces from  [UTKFace Dataset](https://susanqq.github.io/UTKFace/). With an (handmade) encoding of the Smile-strength degree to produce conditional generation of synthetic faces with a given smile degree.
 
 ## Installation
 1. Clone the repository ``` git clone https://github.com/raulorteg/SmileCVAE```
@@ -14,11 +14,6 @@ Implementation of AE, VAE and CVAE. Trained CVAE on faces from  [UTKFace Dataset
 3. Install requirements on the Virtual environment ``` python -m pip install -r requirements.txt ```
 4. Create the directory structure ``` python setup_directories.py ```
 
-## Usage
-### With shell scripts files:
-_Note: Shell scripts are created to easily train and obtain visualizations, to run everything:_ 
-1. Navigate to ```cd scripts/pc```
-2. To run all scripts ``` sh run_all.sh```
 
 ### Manually
 1. Train the models (e.g ``` python cvae.py --n_epochs=1000 --lr=0.00002 --beta=0.5 --batch_size=8 --latent_size=20 --resize=50 ```)
@@ -27,23 +22,6 @@ _Note: Shell scripts are created to easily train and obtain visualizations, to r
 4. Inspect the axis-th dimension of the latent space (e.g ``` python sample_across_axis.py --axis=0 --resize=50 --latent=20 ```)
 
 ## Results
-### Training
-In the .gif below the reconstruction for a group of 32 faces from the dataset can be visualized for all epochs. For the Grayscale and RGB implementation.
-
-![Training](black_and_white/results/cvae_training.gif)
-![Training](figures/training_reconstructions.gif)
-
-Below, the final reconstruction of the CVAE for 32 faces of the dataset side by side to those original 32 images, for comparison. For the Grayscale and RGB implementation.
-
-<p float="left">
-  <img src="black_and_white/results/cvae/iter_965.png" width="400" />
-  <img src="black_and_white/results/cvae/original.png" width="400" /> 
-</p>
-<p float="left">
-  <img src="results/iterations/iter_1000.png" width="400" />
-  <img src="results/iterations/original.png" width="400" /> 
-</p>
-
 ### Conditional generation
 Using ```synthetic.py```, we can sample from the prior distribution of the CVAE, concatenate the vector with our desired ecnoding of the smile degree and let
 the CVAE decode this sampled noise into a synthetic face of the desired smile degree. The range of smile-degree encodings in the training set is [-1,+1], where
